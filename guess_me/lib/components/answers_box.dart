@@ -15,64 +15,76 @@ class AnswersBox extends StatelessWidget {
       height: 200.0,
       child: new Material(
         color: Colors.lightBlue,
-          child: new Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              new Column(
+              new Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-
-                  new Container(
-                    height: 50.0,
-                    width: 150.0,
-                    child: new RaisedButton(
-                      onPressed: () => callback(_answers[0]),
-                      color: Colors.white,
-                      child: new Text(_answers[0], style: new TextStyle(fontSize: 20.0)),
-                    )
+                  new Expanded(
+                    child: new Padding(
+                      padding: new EdgeInsets.all(10.0),
+                      child: new ButtonTheme(
+                        height: 75.0,
+                        child: new RaisedButton(
+                          onPressed: () => callback(_answers[0]),
+                          color: Colors.white,
+                          child: new Text(_answers[0], style: new TextStyle(fontSize: 20.0)),
+                        )
+                      )
+                    ) 
                   ),
-
-                  new Container(
-                    height: 50.0,
-                    width: 150.0,
-                    child: new RaisedButton(
-                      onPressed: () => callback(_answers[1]),
-                      color: Colors.white,
-                      child: new Text(_answers[1], style: new TextStyle(fontSize: 20.0)),
-                    )
+                  new Expanded(
+                    child: new Padding(
+                      padding: new EdgeInsets.all(10.0),
+                      child: new ButtonTheme(
+                        height: 75.0,
+                        child: new RaisedButton(
+                          onPressed: () => callback(_answers[1]),
+                          color: Colors.white,
+                          child: new Text(_answers[1], style: new TextStyle(fontSize: 20.0)),
+                        )
+                      )
+                    ) 
                   ),
-
-                ],
+                ]
               ),
-              new Column(
+              new Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                    new Container(
-                    height: 50.0,
-                    width: 150.0,
-                    child: new RaisedButton(
-                      onPressed: () => callback(_answers[2]),
-                      color: Colors.white,
-                      child: new Text(_answers[2], style: new TextStyle(fontSize: 20.0)),
-                    )
+                  new Expanded(
+                    child: new Padding(
+                      padding: new EdgeInsets.all(10.0),
+                      child: new ButtonTheme(
+                        height: 75.0,
+                        child: new RaisedButton(
+                          onPressed: () => callback(_answers[2]),
+                          color: Colors.white,
+                          child: new Text(_answers[2], style: new TextStyle(fontSize: 20.0)),
+                        )
+                      )
+                    ) 
                   ),
-
-                  new Container(
-                    height: 50.0,
-                    width: 150.0,
-                    child: new RaisedButton(
-                      onPressed: () => callback(_answers[3]),
-                      color: Colors.white,
-                      child: new Text(_answers[3], style: new TextStyle(fontSize: 20.0)),
-                    )
+                  new Expanded(
+                    child: new Padding(
+                      padding: new EdgeInsets.all(10.0),
+                      child: new ButtonTheme(
+                        height: 75.0,
+                        child: new RaisedButton(
+                          onPressed: () => callback(_answers[3]),
+                          color: Colors.white,
+                          child: new Text(_answers[3], style: new TextStyle(fontSize: 20.0)),
+                        )
+                      )
+                    ) 
                   ),
-                ],
+                ]
               )
             ],
           )
