@@ -17,10 +17,11 @@ class QuestionsPage extends StatefulWidget {
 
 class QuestionsPageState extends State<QuestionsPage> {
 
-  int questionNumber;
-  bool isCorrect;
-  bool overlayShouldBeVisible = false;
-  Country currentCountry;
+  int _questionNumber;
+  bool _isCorrect;
+  bool _displayOverlay = false;
+  Country _currentCountry;
+  List<String> _randomCountries;
 
   Countries countries = new Countries([
     new Country('Argentina', 'ARS'),
@@ -41,31 +42,35 @@ class QuestionsPageState extends State<QuestionsPage> {
   @override
   void initState() {
     super.initState();
-    currentCountry = countries.nextCountry;
-    questionNumber = countries.questionNumber;
+    _currentCountry = countries.nextCountry;
+    _questionNumber = countries.questionNumber;
   }
 
   List<String> generateAnswers() {
-    List<String> randomCountries = new List<String>();
-    randomCountries.add(currentCountry.name);
+    if (!_displayOverlay) {
+      _randomCountries = new List<String>();
+      _randomCountries.add(_currentCountry.name);
 
-    for(int i = 0; i <= 2; i++) {
-      String randomCountry = countries.randomCountry.name;
+      for(int i = 0; i <= 2; i++) {
+        String randomCountry = countries.randomCountry.name;
 
-      while(randomCountries.contains(randomCountry)) {
-        randomCountry = countries.randomCountry.name;
+        while(_randomCountries.contains(randomCountry)) {
+          randomCountry = countries.randomCountry.name;
+        }
+        _randomCountries.add(randomCountry);
       }
-      randomCountries.add(countries.randomCountry.name);
+      _randomCountries.shuffle();
+      return _randomCountries;
+    } else {
+      return _randomCountries;
     }
-    randomCountries.shuffle();
-    return randomCountries;
   }
 
   void checkAnswer(String answer) {
-    isCorrect = (currentCountry.name == answer);
-    countries.answer(isCorrect);
+    _isCorrect = (_currentCountry.name == answer);
+    countries.answer(_isCorrect);
 
-    this.setState(() { overlayShouldBeVisible = true; });
+    this.setState(() { _displayOverlay = true; });
   }
 
   @override
@@ -76,21 +81,21 @@ class QuestionsPageState extends State<QuestionsPage> {
           new Column(
             children: <Widget>[
               new TitleBox('Question ' + countries.questionNumber.toString() + '/5'),
-              new QuestionBox(currentCountry.currency),
+              new QuestionBox(_currentCountry.currency),
               new AnswersBox(generateAnswers(), checkAnswer)
             ]
           ),
-          overlayShouldBeVisible == true ? new AnswerOverlay(
-          isCorrect,
+          _displayOverlay == true ? new AnswerOverlay(
+          _isCorrect,
           () {
-            if (questionNumber == 5) {
+            if (_questionNumber == 5) {
               Navigator.of(context).pushAndRemoveUntil(new MaterialPageRoute(builder: (BuildContext context) => new ScorePage(countries.score, 5)), (Route route) => route == null);
               return;
             }
-            currentCountry = countries.nextCountry;
+            _currentCountry = countries.nextCountry;
             this.setState((){
-              overlayShouldBeVisible = false;
-              questionNumber = countries.questionNumber;
+              _displayOverlay = false;
+              _questionNumber = countries.questionNumber;
             });
           }
           ) : new Container()
