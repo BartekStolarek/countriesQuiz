@@ -13,4 +13,4 @@ A simple Dart and Flutter quiz game, where user can choose which currency belong
 
 ### Demo
 
-![Alt_text](https://i.ibb.co/N78ZjJz/guess-Me-gif.gif)
+![Alt_text](https://i.ibb.co/60DfZJb/guessMe.gif)
